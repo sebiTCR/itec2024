@@ -4,7 +4,10 @@ const endpointStatus = require("./endpointStatus");
 
 const schema = new Schema({
     endpoint: String,
-    stats: [ endpointStatus.schema ]
+    stats:{
+        type: [ endpointStatus.schema ],
+        default: []
+    }
 })
 
 const model = new mongoose.model('EndpointStatus', schema)

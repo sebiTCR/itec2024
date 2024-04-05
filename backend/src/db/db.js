@@ -15,3 +15,5 @@ async function connect(){
 }
 
 connect()
+
+module.exports = {Endpoint, EndpointStatus}

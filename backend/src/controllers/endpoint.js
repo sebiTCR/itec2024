@@ -1,4 +1,4 @@
-const {db} = require('../db/db')
+const db = require('../db/db')
 
 let placeholder = {
     status: [
@@ -17,15 +17,25 @@ let placeholder = {
     ]
 }
 
-function sendConnection (req, res){
-    //TODO: fetch website status
-    res.send(placeholder)
+async function sendConnection (req, res){
+    let link = req.body.link;
+    let result = await db.Endpoint.findOne({endpoint: link})
+    if (result == ''){
+        res.send({msg: "Endpoint not found!"})
+    }
+    res.send(result)
 }
 
-function registerLink(req, res){
-    //TODO: Register link in the DB
+async function registerLink(req, res){
     let link = req.body.link;
-    console.log(link)
+    if(await db.Endpoint.findOne({endpoint: link})){
+        res.send({msg: "Endpoint already exists!"})
+        return;
+    }
+    console.log("Creating entry...")
+    await db.Endpoint.create({
+        endpoint: link
+    })
     res.send({msg: "Link registered", link: link})
 }
 
