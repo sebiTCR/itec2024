@@ -6,8 +6,9 @@ import Status from './components/Status.vue'
 
 <template>
   <LinkRegister/>
+  <Status></Status>
 </template>
 
 <style scoped>
-
+ 
 </style>
