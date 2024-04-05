@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		"postcss": "^8.4.38",
+		"sass": "^1.74.1",
+		"scss": "^0.2.4"
+	},
+	"devDependencies": {
+		"@iconify/vue": "^4.1.1"
+	}
+}

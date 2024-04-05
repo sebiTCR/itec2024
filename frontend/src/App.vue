@@ -5,9 +5,13 @@ import Status from './components/Status.vue'
 </script>
 
 <template>
-  <LinkRegister/>
+  <div class="main">
+    <LinkRegister/>
+  </div>
 </template>
 
 <style scoped>
-
+.main{
+  height: 100%;
+}
 </style>
