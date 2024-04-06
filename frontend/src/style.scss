@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Lexend:wght@100..900&display=swap');
+@import '/node_modules/flowbite-vue/dist/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+//Colors
+$background: #ffffff;
+$foreground: #181818;
+$foreground-border: #efefef;
+$green: #20BF55;
+$yellow: #FF8C42;
+$red: #D64550;
+
+h1, h2, h3, h4 {
+  font-family: "Lexend", sans-serif;
+  color: $foreground;
+}
+
+p {
+  font-family: "Jost", sans-serif;
+  color: $foreground;
+}
+
+html, body, #app {
+  background-color: $background;
+  height: 100%;
+  margin: 0;
+}

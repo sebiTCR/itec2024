@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"@vueform/vueform": "^1.9.3",
+		"postcss": "^8.4.38",
+		"sass": "^1.74.1",
+		"scss": "^0.2.4",
+		"vue-js-modal": "^2.0.1"
+	},
+	"devDependencies": {
+		"@iconify/vue": "^4.1.1"
+	}
+}
