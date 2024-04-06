@@ -1,13 +1,20 @@
 <script setup>
 import NeoStatus from '../components/NeoStatus.vue'
 import axios from 'axios'
+import {onMounted, ref} from 'vue'
 
-var data;
+var data = ref([]);
 
-axios('http://localhost:8085/api/endpoints').then((r)=> {
-  data = r.data
-  console.table(JSON.stringify(r.data))} 
-).catch((e)=> console.error(e))
+onMounted(()=>{
+  axios('http://localhost:8085/api/endpoints')
+    // .then((r)=> {r.json()})
+    .then((r)=> data.value = r.data)
+    .then((r)=> console.table(data.value))
+
+})
+
+
+
 
 </script>
 
