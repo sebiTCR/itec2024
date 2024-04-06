@@ -24,25 +24,31 @@
 const props = defineProps(['stats'])
 var states
 var statesStyles = []
-var displayers = 0
 
 states = props.stats
-if(states.lenght > 12){
+if(states.length > 12){
     //FIXME: FIX SPLICING
-    states = states.slice(states.lenght - 12, states.lenght)
+    states = states.slice(states.length - 12, states.length)
+    console.log(states.length)
 }
 
 //Fill with received data
-for(const state in props.stats){
-    if(state == 0)
-        statesStyles.push("color: #008148;")
-    else if(state == 1)
-        statesStyles.push("color: #FFBA08;")
-    else if(state == 2)
-        statesStyles.push("color: #D7263D;")
-    else
-        statesStyles.push("color: #333333;")
-}
+states.map((state)=>{
+    switch(state.status){
+        case 0:
+            statesStyles.push("color: #008148;")
+            break;
+        case 1:
+            statesStyles.push("color: #FFBA08;")
+            break;
+        case 2:
+            statesStyles.push("color: #D7263D;")
+            break;
+        default:
+            statesStyles.push("color: #333333;")
+            break
+    }
+})
 
 
 //Fill the blanks
@@ -50,5 +56,8 @@ while(statesStyles.length < 12){
     statesStyles.push("color: #1F1F1F;")
     console.log("Adding")
 }
+
+
+console.log(`num props: ${statesStyles.length}`)
 
 </script>
