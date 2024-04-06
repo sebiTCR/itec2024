@@ -6,9 +6,6 @@
     </form>
 </template>
 
-
-
-
 <style>
 .searchbar{
     display: flex;
@@ -34,8 +31,6 @@
 .negru{
     background-color: #181818;
 }
-
-
 
 
 
