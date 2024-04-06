@@ -4,8 +4,12 @@ const endpointStatus = require("./endpointStatus");
 
 const schema = new Schema({
     endpoint: String,
+    reported: {
+        type: Boolean,
+        default: false
+    },
     stats:{
-        type: [ endpointStatus.schema ],
+        type: Array,
         default: []
     }
 })

@@ -1,22 +1,5 @@
 const db = require('../db/db')
 
-let placeholder = {
-    status: [
-        {
-            time: Date.now(),
-            status: 0
-        },
-        {
-            time: Date.now(),
-            status: 0
-        },
-        {
-            time: Date.now(),
-            status: 0
-        }
-    ]
-}
-
 async function sendConnection (req, res){
     let link = req.body.link;
     let result = await db.Endpoint.findOne({endpoint: link})
@@ -39,5 +22,10 @@ async function registerLink(req, res){
     res.send({msg: "Link registered", link: link})
 }
 
+async function getEntries(req, res){
+    let results = await db.Endpoint.find({})
+    res.send(results)
+}
 
-module.exports = {sendConnection, registerLink}
+
+module.exports = {sendConnection, registerLink, getEntries}
