@@ -9,8 +9,9 @@ const sw = require ('./workers/service-updater')
 app.use(cors())
 app.use(bp.json())
 
-app.get('/api/link', endpointCtrl.sendConnection)
-app.post('/api/link', endpointCtrl.registerLink)
+app.get('/api/endpoint', endpointCtrl.sendConnection)
+app.post('/api/endpoint', endpointCtrl.registerLink)
+app.get('/api/endpoints', endpointCtrl.getEntries)
 
 sw.update()
 
