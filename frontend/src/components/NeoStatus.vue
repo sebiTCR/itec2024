@@ -22,7 +22,7 @@ const props = defineProps(['reported', 'endpoint', 'stats'])
     align-content: center;
 
     border: solid;
-    border-color: rgb(217, 217, 217);
+    border-color: #fbfbff;
     border-width: 2px;
     border-radius: 5em;
     max-height: 3em;
@@ -43,7 +43,7 @@ const props = defineProps(['reported', 'endpoint', 'stats'])
 }
 
 p {
-    color: #FF8C42;
+    color: #FFBA08;
 }
 
 h4{

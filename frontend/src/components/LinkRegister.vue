@@ -22,14 +22,14 @@
     margin-right: auto;
 
     border: solid;
-    border-color: #efefef;
+    border-color: #fbfbff;
     border-radius: 5em;
 
  }
 
 
 .negru{
-    background-color: #181818;
+    background-color: #121212;
 }
 
 

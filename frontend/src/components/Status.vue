@@ -11,12 +11,12 @@
 
 </template>
 
-<style>
+<style lang="scss">
     .continer{
         display: flex;
         flex-direction: column;
         border:solid;
-        border-color: lightgrey;
+        border-color: #fbfbff;
         border-radius: 25px;
 
     }
@@ -25,7 +25,7 @@
         display: flex;
         justify-content: center;
         border-bottom: solid;
-        border-color: lightgray;
+        border-color: #fbfbff;
     }
 
     .segments{
@@ -43,7 +43,7 @@
     }
 
     p1:hover{
-        background-color: black;
+        background-color: #121212;
     }
      
 </style>

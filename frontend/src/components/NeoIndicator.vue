@@ -34,22 +34,21 @@ if(states.lenght > 12){
 
 //Fill with received data
 for(const state in props.stats){
-
     if(state == 0)
-        statesStyles.push("color: #20BF55;")
+        statesStyles.push("color: #008148;")
     else if(state == 1)
-        statesStyles.push("color: #FF8C42;")
+        statesStyles.push("color: #FFBA08;")
     else if(state == 2)
-        statesStyles.push("color: #D64550;")
+        statesStyles.push("color: #D7263D;")
     else
-        statesStyles.push("color: #D9D9D9;")
+        statesStyles.push("color: #1F1F1F;")
 }
 
 
 
 //Fill the blanks
 while(statesStyles.lenght < 12){
-    statesStyles.push("color: #D9D9D9;")
+    statesStyles.push("color: #1F1F1F;")
     console.log("Adding")
 }
 
