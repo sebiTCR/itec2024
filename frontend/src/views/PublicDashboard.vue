@@ -13,9 +13,6 @@ onMounted(()=>{
 
 })
 
-
-
-
 </script>
 
 <template>
