@@ -8,8 +8,6 @@ const props = defineProps(['reported', 'endpoint', 'stats'])
     <div class="container">
         <h4> {{ props.endpoint }} </h4>
         <NeoIndicator class="indicator" :stats="props.stats"/>
-        <p v-if="props.reported">Users have reported issues with this endpoint.</p>
-        <div v-else class="emptybox"></div>
     </div>
 </template>
 
@@ -37,14 +35,6 @@ const props = defineProps(['reported', 'endpoint', 'stats'])
     max-width: 25%;
 }
 
-.emptybox{
-    min-width: 25%;
-    max-width: 25%;
-}
-
-p {
-    color: #FFBA08;
-}
 
 h4{
     max-width: 25%;

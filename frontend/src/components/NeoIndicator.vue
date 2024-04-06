@@ -41,13 +41,12 @@ for(const state in props.stats){
     else if(state == 2)
         statesStyles.push("color: #D7263D;")
     else
-        statesStyles.push("color: #1F1F1F;")
+        statesStyles.push("color: #333333;")
 }
 
 
-
 //Fill the blanks
-while(statesStyles.lenght < 12){
+while(statesStyles.length < 12){
     statesStyles.push("color: #1F1F1F;")
     console.log("Adding")
 }
