@@ -1,9 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 import LinkRegister from './components/LinkRegister.vue'
 import Status from './components/Status.vue'
 import NeoStatus from './components/NeoStatus.vue'
-import AddButton from './components/AddButton.vue'
 
 
 const placeholder_one = {
