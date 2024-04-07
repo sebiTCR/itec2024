@@ -1,17 +1,43 @@
 <script setup>
+import axios from "axios";
 import NeoIndicator from "./NeoIndicator.vue"
+import Cookies from 'vue-cookies'
 
 const props = defineProps(['reported', 'endpoint', 'stats'])
+var isDev = (Cookies.get("token") != null)
+
+function report(endpoint){
+    if (isDev)
+        axios.patch(`http://localhost:8085/api/endpoint/report`, {endpoint: endpoint}).then((r)=> alert(r.data.msg))
+        return
+    axios.post(`http://localhost:8085/api/endpoint/report`, {endpoint: endpoint}).then((r)=> alert(r.data.msg))
+}
+
+
 </script>
 
 <template>
     <div class="container">
         <h4> {{ props.endpoint }} </h4>
         <NeoIndicator class="indicator" :stats="props.stats"/>
+        <button @click="report(props.endpoint)">
+            <v-icon v-if="isDev" class='report' name="md-reportoff-outlined"></v-icon> 
+            <v-icon v-else="isDev" class='report' name="md-reportgmailerrorred"></v-icon> 
+        </button>
     </div>
 </template>
 
 <style scoped>
+button{
+    background-color: #fbfbff00;
+    border-color: #fbfbff00;
+    color: #fbfbff;
+}
+
+.report:hover{
+    color: #FFBA08;
+}
+
 .container{
     display: flex;
     flex-direction: row;
