@@ -13,6 +13,7 @@
     "dotenv": "^16.4.5",
     "flowbite": "^2.3.0",
     "flowbite-vue": "^0.1.3",
+    "oh-vue-icons": "1.0.0-rc3",
     "vue": "^3.4.21",
     "vue-router": "4"
   },

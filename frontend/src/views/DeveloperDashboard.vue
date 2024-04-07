@@ -9,12 +9,21 @@ var data = ref([]);
 var newEndpoint = ref("")
 
 onMounted(()=>{
+  refresh_list()
+})
+
+let updateInterval = setInterval(()=>{
+  refresh_list()
+  clearInterval(updateInterval)
+}, 5000)
+
+
+function refresh_list(){
   axios('http://localhost:8085/api/endpoints')
     // .then((r)=> {r.json()})
     .then((r)=> data.value = r.data)
     .then((r)=> console.table(data.value))
-
-})
+}
 
 function trackNewEndpoint(){
   if(newEndpoint.value.charAt(0) != '/')[
