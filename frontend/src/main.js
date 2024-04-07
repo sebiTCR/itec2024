@@ -8,9 +8,10 @@ import { createWebHistory } from 'vue-router'
 import { createMemoryHistory } from 'vue-router'
 import Login from './views/login.vue'
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { HiArrowCircleRight } from "oh-vue-icons/icons";
+import { HiArrowCircleRight, MdReportgmailerrorred } from "oh-vue-icons/icons";
+import VueCookies from 'vue-cookies'
 
-addIcons(HiArrowCircleRight)
+addIcons(HiArrowCircleRight, MdReportgmailerrorred)
 
 
 const routes = [
@@ -26,6 +27,7 @@ const router = createRouter({
 
 createApp(App)
     .use(router)
+    .use(VueCookies)
     .component('v-icon', OhVueIcon)
     .mount('#app')
 
