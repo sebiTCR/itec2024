@@ -1,4 +1,18 @@
 const db = require('../db/db')
+const nodemailer = require('nodemailer')
+
+let transporter = null
+nodemailer.createTestAccount((err, account) => {
+    transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: account.user, // generated ethereal user
+            pass: account.pass  // generated ethereal password
+        }
+    })
+})
 
 async function sendConnection (req, res){
     let link = req.body.link;
@@ -54,8 +68,17 @@ async function update(req, res){
 async function report(req, res){
     //TODO: Implement mail sender
     const endpoint = req.body.endpoint
+    transporter.sendMail({
+        from: process.env.MAIL_EMAIL,
+        to: process.env.MAIL_EMAIL,
+        subject: `'${endpoint}' has been reported by an user!`,
+        text:`Your endpoint ('${endpoint}') has been reported by users! Fix it up!`
+    })
     await db.Endpoint.findOneAndUpdate({endpoint: endpoint}, {reported: true})
+    
     res.send({msg: `Reported ${endpoint}`})
+
+    
 
 }
 
