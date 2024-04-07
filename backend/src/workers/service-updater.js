@@ -1,8 +1,8 @@
 const axios = require('axios')
 const db = require('../db/db')
+const http = require('http')
 
-var success_score = 0
-var attempts = 0
+var intrHandle
 
 const score = {
     healthy: 0,
@@ -11,9 +11,19 @@ const score = {
 }
 
 
-async function updateEndpointStatus(endpoint, status){
-    await db.Endpoint.findOneAndUpdate({endpoint: endpoint},{ stats: status}) 
+async function updateEndpointStatus(id, status){
+    await db.Endpoint.findOneAndUpdate(id, { stats: status}, {new: true})
 }
+
+
+function getAproxDate(){
+    let date = new Date()
+    date.setMinutes(0)
+    date.setSeconds(0)
+    date.setMilliseconds(0)
+    return date
+}
+
 
 /**
  * Registers the status of the endpoint
@@ -21,44 +31,60 @@ async function updateEndpointStatus(endpoint, status){
  */
 async function registerStatus(endpoint){
     var stats = endpoint.stats
+    const url = `http://localhost:8085${endpoint.endpoint}`
+    var currentDate = getAproxDate()
 
-    await axios({
-        method: 'get',
-        url: endpoint,
-    }).then((res)=>{
-        if(res.status == 200 || res.status == 301){
+    http.get(url, (res)=>{
+        res.on('error', (e)=>{
+            console.error(e)
+        })
+
+        let rcode = res.statusCode
+        if(rcode === 200 || rcode === 301){
             stats.push({
-                date: Date.now(),
+                date: currentDate,
                 status: score.healthy
             })
-            updateEndpointStatus(endpoint.endpoint, stats)
+        } else {
+            stats.push({
+                date: currentDate,
+                status: score.down
+            })
         }
-    }).catch((e)=>{
-        console.log(e)
-        stats.push({
-            date: Date.now(),
-            status: score.down
-        })
-        updateEndpointStatus(endpoint.endpoint, stats)
 
+        clearInterval(intrHandle)
+
+        updateEndpointStatus(endpoint._id, stats)
     })
-
-
-
-    // db.Endpoint.updateOne({endpoint: endpoint.endpoint}, stats).then((res)=> console.log(res))
-    console.log(stats)
 }
+
 
 async function update(){
     const endpoints = await db.Endpoint.find({})
 
     endpoints.map((endpoint)=>{
-        setTimeout(() =>{
-            registerStatus(endpoint)
-        }, 5000)
-        update()
+    intrHandle = setTimeout(() =>{
+        registerStatus(endpoint)
+    }, 5000)
     })
 }
 
 
-module.exports = {update}
+async function refresh_content(endpoints){
+    endpoints = await db.Endpoint.find({})
+}
+
+async function setup(){
+    var endpoints = []
+    refresh_content(endpoints)
+
+    endpoints.map((endpoint)=>{
+    intrHandle = setInterval(() =>{
+        refresh_content(endpoints)
+        registerStatus(endpoint)
+    }, 5000)
+    })
+}
+
+
+module.exports = {update, setup}
