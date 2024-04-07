@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueform/vueform": "^1.9.3",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "flowbite": "^2.3.0",

@@ -29,7 +29,7 @@ function trackNewEndpoint(){
   if(newEndpoint.value.charAt(0) != '/')[
     newEndpoint.value = '/' + newEndpoint.value
   ]
-  axios.post('http://localhost:8085/api/endpoint', {link: newEndpoint.value }).then((res)=> alert(JSON.stringify(res)))
+  axios.post('http://localhost:8085/api/endpoint', {link: newEndpoint.value }).then((res)=> alert(res.data.msg))
 }
 
 </script>

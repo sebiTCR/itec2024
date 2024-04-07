@@ -21,32 +21,35 @@
 </style>
 
 <script setup>
-const props = defineProps(['stats'])
+const props = defineProps(['stats', 'reported'])
 var states
 var statesStyles = []
 
 states = props.stats
 if(states.length > 12){
-    //FIXME: FIX SPLICING
     states = states.slice(states.length - 12, states.length)
-    console.log(states.length)
+    console.log(`Spliced States: ${JSON.stringify(states)}`)
 }
 
 //Fill with received data
 states.map((state)=>{
-    switch(state.status){
-        case 0:
-            statesStyles.push("color: #008148;")
-            break;
-        case 1:
-            statesStyles.push("color: #FFBA08;")
-            break;
-        case 2:
-            statesStyles.push("color: #D7263D;")
-            break;
-        default:
-            statesStyles.push("color: #333333;")
-            break
+    if(props.reported)
+        statesStyles.push("color: #FFBA08;")
+    else{
+        switch(state.status){
+            case 0:
+                statesStyles.push("color: #008148;")
+                break;
+            case 1:
+                statesStyles.push("color: #FFBA08;")
+                break;
+            case 2:
+                statesStyles.push("color: #D7263D;")
+                break;
+            default:
+                statesStyles.push("color: #333333;")
+                break
+        }
     }
 })
 

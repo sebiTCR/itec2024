@@ -42,7 +42,7 @@ async function registerStatus(endpoint){
 
         let rcode = res.statusCode
         let conStatus = score.healthy
-        if(rcode === 200 || rcode === 301){
+        if(rcode == 200 || rcode == 301){
             conStatus = score.healthy
         } else {
             conStatus = score.unstable
