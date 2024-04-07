@@ -3,6 +3,7 @@ const db = require('../db/db')
 const http = require('http')
 
 var intrHandle
+var endpoints = []
 
 const score = {
     healthy: 0,
@@ -40,17 +41,17 @@ async function registerStatus(endpoint){
         })
 
         let rcode = res.statusCode
+        let conStatus = score.healthy
         if(rcode === 200 || rcode === 301){
-            stats.push({
-                date: currentDate,
-                status: score.healthy
-            })
+            conStatus = score.healthy
         } else {
-            stats.push({
-                date: currentDate,
-                status: score.down
-            })
+            conStatus = score.unstable
         }
+
+        stats.push({
+            date: currentDate,
+            status: conStatus
+        })
 
         clearInterval(intrHandle)
 
@@ -59,32 +60,22 @@ async function registerStatus(endpoint){
 }
 
 
-async function update(){
-    const endpoints = await db.Endpoint.find({})
 
-    endpoints.map((endpoint)=>{
-    intrHandle = setTimeout(() =>{
-        registerStatus(endpoint)
-    }, 5000)
-    })
-}
-
-
-async function refresh_content(endpoints){
+async function refresh_content(){
     endpoints = await db.Endpoint.find({})
 }
 
+
 async function setup(){
-    var endpoints = []
-    refresh_content(endpoints)
+    endpoints = await db.Endpoint.find({})
 
     endpoints.map((endpoint)=>{
-    intrHandle = setInterval(() =>{
-        refresh_content(endpoints)
-        registerStatus(endpoint)
-    }, 5000)
+        intrHandle = setInterval(() =>{
+            refresh_content()
+            registerStatus(endpoint)
+        }, 1000)
     })
 }
 
 
-module.exports = {update, setup}
+module.exports = {setup}

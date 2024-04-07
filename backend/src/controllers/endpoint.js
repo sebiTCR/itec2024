@@ -31,7 +31,8 @@ async function registerLink(req, res){
     }
     console.log("Creating entry...")
     await db.Endpoint.create({
-        endpoint: link
+        endpoint: link,
+        stats: []
     })
     res.send({msg: "Link registered", link: link})
 }
@@ -44,10 +45,6 @@ async function getEntries(req, res){
 
 async function remove(req, res){
     const endpoint = req.body.endpoint
-    // let results = await db.Endpoint.find({endpoint: endpoint})
-    // if(!results)
-    //     res.send({msg: "No entry found"})
-    //     return
     await db.Endpoint.findOneAndDelete({endpoint: endpoint})
     res.send({msg: `Removed ${endpoint}`})
 }
@@ -66,7 +63,6 @@ async function update(req, res){
 
 
 async function report(req, res){
-    //TODO: Implement mail sender
     const endpoint = req.body.endpoint
     transporter.sendMail({
         from: process.env.MAIL_EMAIL,
